@@ -9,22 +9,29 @@ class API
         uri = URI(url)
         response = Net::HTTP.get(uri)
         hash= JSON.parse(response)
-        array_of_superheroes = hash["results"]
-        
-        
-        array_of_superheroes.each do |hero|
 
-        superhero_instance= SuperHero.new
-
-        superhero_instance.id = hero["id"]
-        superhero_instance.name = hero["name"]
-        superhero_instance.powerstats= hero["powerstats"]
-        superhero_instance.biography = hero["biography"]
-        superhero_instance.appearance = hero["appearance"]
-        superhero_instance.work = hero["work"]
+        if hash["response"] == "error"
+            false
+        else    
+            array_of_superheroes = hash["results"]
         
         
+            array_of_superheroes.each do |hero|
+    
+                superhero_instance= SuperHero.new
+        
+                superhero_instance.id = hero["id"]
+                superhero_instance.name = hero["name"]
+                superhero_instance.powerstats= hero["powerstats"]
+                superhero_instance.biography = hero["biography"]
+                superhero_instance.appearance = hero["appearance"]
+                superhero_instance.work = hero["work"]
+            
+                
+            end
+            
         end
+        
          
       
     end
