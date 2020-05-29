@@ -159,19 +159,21 @@ class CLI
 
    def users_choice
     puts "\n MENU"
-    puts "\nTo select another category: type '1'"
+    puts "\nTo exit: type '0'"
+    puts "To select another category: type '1'"
     puts "To select a new superhero from your search: type '2'"
     puts "To start a new search: type '3'"
-    puts"To exit: type '4'"
+    
     index = gets.strip.to_i
 
-      until index.between?(1, 4)
+      until index.between?(0, 3)
         puts "⇪ Invalid number. Please try again."
         index = gets.strip.to_i
       end  
 
       case index
-
+        when 0
+          self.exit_program
         when 1
           puts "\n"
           self.display_categories
@@ -190,8 +192,6 @@ class CLI
           puts "\n"
           SuperHero.reset_all
           self.first_step
-        when 4
-          self.exit_program
       end
    end
 
