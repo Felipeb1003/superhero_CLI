@@ -1,11 +1,12 @@
 class API
     
-    TOKEN = 10158132119596768
+    ENV["TOKEN"]
+
     def self.fetch_superhero(input)
        
         @input=input.gsub(/\s+/, "%20")
         @input
-        url = 'https://www.superheroapi.com/api.php/10158132119596768/search/' + @input
+        url = "https://www.superheroapi.com/api.php/#{ENV["TOKEN"]}/search/" + @input
         uri = URI(url)
         response = Net::HTTP.get(uri)
         hash= JSON.parse(response)
@@ -26,13 +27,8 @@ class API
                 superhero_instance.biography = hero["biography"]
                 superhero_instance.appearance = hero["appearance"]
                 superhero_instance.work = hero["work"]
-            
-                
-            end
-            
+            end  
         end
-        
-         
-      
     end
+
 end
