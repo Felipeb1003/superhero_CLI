@@ -63,28 +63,29 @@ class CLI
     end
        
     def select_a_category
-      puts "Please select the category that you would like to see or type '0' to exit:"
-      index = gets.strip.to_i 
-      max_limit= @categories.length 
+      puts "Please select the category that you would like to see or type '4' to exit:"
+      index = gets.strip.to_i - 1
+      
 
-      until index.between?(0, max_limit)
+      until index.between?(0, 4)
         puts "⇪ Invalid number. Please try again."
-        index = gets.strip.to_i 
+        index = gets.strip.to_i - 1 
       end  
 
       case index
 
       when 0
-        self.exit_program
-      when 1
         self.user_chose_appearance
-      when 2   
+      when 1 
         self.user_chose_biography
-      when 3
+      when 2
         self.user_chose_powerstats
-      when 4
+      when 3
         self.user_chose_work
+      when 4
+        self.exit_program  
       end  
+      
 
    end
    
@@ -159,21 +160,20 @@ class CLI
 
    def users_choice
     puts "\n MENU"
-    puts "\nTo exit: type '0'"
-    puts "To select another category: type '1'"
+    puts "\nTo select another category: type '1'"
     puts "To select a new superhero from your search: type '2'"
     puts "To start a new search: type '3'"
+    puts "To exit: type '4'"
     
     index = gets.strip.to_i
 
-      until index.between?(0, 3)
+      until index.between?(1, 4)
         puts "⇪ Invalid number. Please try again."
         index = gets.strip.to_i
       end  
 
       case index
-        when 0
-          self.exit_program
+      
         when 1
           puts "\n"
           self.display_categories
@@ -192,6 +192,8 @@ class CLI
           puts "\n"
           SuperHero.reset_all
           self.first_step
+        when 4
+          self.exit_program 
       end
    end
 
