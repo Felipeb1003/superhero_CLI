@@ -1,7 +1,9 @@
 class CLI 
+
     def start
       puts "\n"
-      puts "\nWelcome to the Superhero fact checker!"
+      puts Rainbow("\nWelcome to the Superhero Fact Checker!").red
+      puts "\nHere you can find everything you want to know about your favorite SuperHeroes!"
       self.first_step
     end
   
@@ -31,58 +33,59 @@ class CLI
 
     def ask_user_for_superhero_name
         puts "\n"
+        puts "\n"
+        puts "\n"
         puts "Please enter the name of the Superhero you are looking for:"
         input_superhero_name= gets.strip.downcase
     
-        #Validate the input
         until API.fetch_superhero(input_superhero_name) 
             puts "Superhero not found. (ง'̀-'́)ง Please try again."
             
             input_superhero_name= gets.strip.downcase
         end
-               self.display_search_name_result
+            self.display_search_name_result
+
     end
     
-    
-
     def select_a_superhero
       puts "\nPlease Select the character you would like to look at:"
        index = gets.strip.to_i - 1
-
-       #Validate input
        max_limit = SuperHero.all.length - 1
+
        until index.between?(0, max_limit) 
         puts "⇪ Invalid number. Please try again."
         index = gets.strip.to_i - 1
        end
-       @superhero_instance= SuperHero.all[index]
-       puts "\n *#{@superhero_instance.name}*"
+
+        @superhero_instance= SuperHero.all[index]
+        puts "\n *#{@superhero_instance.name}*"
        
     end
        
     def select_a_category
-      puts "Please select the category that you would like to see or type:"
-      index = gets.strip.to_i - 1
-    
-      #validate
-      max_limit= @categories.length - 1
+      puts "Please select the category that you would like to see or type '0' to exit:"
+      index = gets.strip.to_i 
+      max_limit= @categories.length 
 
       until index.between?(0, max_limit)
         puts "⇪ Invalid number. Please try again."
-        index = gets.strip.to_i - 1
+        index = gets.strip.to_i 
       end  
 
       case index
 
       when 0
+        self.exit_program
+      when 1
         self.user_chose_appearance
-      when 1   
+      when 2   
         self.user_chose_biography
-      when 2
-        self.user_chose_powerstats
       when 3
+        self.user_chose_powerstats
+      when 4
         self.user_chose_work
       end  
+
    end
    
    def user_chose_appearance
@@ -91,12 +94,13 @@ class CLI
     puts "\n"
       
       @superhero_instance.appearance.each do |key, value|
-          if key == "height" || key == "weight"
-            puts "-#{key.capitalize} = #{value[0]} || #{value[1]} "
-          elsif
-            puts "-#{key.capitalize} = #{value}"
-          end
+        if key == "height" || key == "weight"
+          puts "-#{key.capitalize} = #{value[0]} || #{value[1]} "
+        elsif
+          puts "-#{key.capitalize} = #{value}"
+        end
       end
+
    end
 
    def user_chose_biography
@@ -106,81 +110,89 @@ class CLI
     
       @superhero_instance.biography.each do |key, value|
         if key == "aliases"
-            if value.length > 1  
-                puts "-#{key.capitalize} =" 
-                value.each{ |name| puts"~~>#{name}."}
-            elsif value.length == 1
-                puts "-#{key.capitalize} = #{value.join}"
-            end
+          if value.length > 1  
+              puts "-#{key.capitalize} =" 
+              value.each{ |name| puts"~~>#{name}."}
+          elsif value.length == 1
+              puts "-#{key.capitalize} = #{value.join}"
+          end
+
         elsif
-            puts "-#{key.capitalize} = #{value}"
-        end
-        
+          puts "-#{key.capitalize} = #{value}"
+        end 
+
       end
    end
 
    def user_chose_powerstats
       puts "*#{@superhero_instance.name}*"
       puts "3. Powerstats."
-      @superhero_instance.powerstats.each do |key, value|
-        puts "-#{key.capitalize} = #{value}"
-      end
+        @superhero_instance.powerstats.each do |key, value|
+          puts "-#{key.capitalize} = #{value}"
+        end
+
    end
 
    def user_chose_work
       puts "*#{@superhero_instance.name}*"
       puts "4. Work."
-      @superhero_instance.work.each do |key, value|
-        puts "-#{key.capitalize} = #{value}"
-      end
+        @superhero_instance.work.each do |key, value|
+          puts "-#{key.capitalize} = #{value}"
+        end
+
+   end
+
+   def exit_program
+      sleep(1)
+      puts "\n"
+      puts ' "Dreams save us.'
+      puts "  Dreams lift us up and transform us."
+      puts "  And on my soul I swear..."
+      puts "  Until my dream of a world where dignity, honor,"
+      puts "  and justice becomes the reality we all share..."
+      puts "  I'll never stop fighting. EVER." + '"'
+      puts "  SUPERMAN"
+
+      sleep(1)
+      exit  
    end
 
    def users_choice
-    
-    puts "\nto select another category: type '1'"
-    puts "to select a new superhero from your search: type '2'"
-    puts "to start a new search: type '3'"
-    puts"to exit: type '4'"
+    puts "\n MENU"
+    puts "\nTo select another category: type '1'"
+    puts "To select a new superhero from your search: type '2'"
+    puts "To start a new search: type '3'"
+    puts"To exit: type '4'"
     index = gets.strip.to_i
-    until index.between?(1, 4)
-      puts "⇪ Invalid number. Please try again."
-       index = gets.strip.to_i
-    end  
 
-    case index
+      until index.between?(1, 4)
+        puts "⇪ Invalid number. Please try again."
+        index = gets.strip.to_i
+      end  
 
-      when 1
-        puts "\n"
-        self.display_categories
-        self.select_a_category
-        sleep(2)
-        self.users_choice
-      when 2
-        puts "\n"
-        self.display_search_name_result
-        self.select_a_superhero
-        self.display_categories
-        self.select_a_category
-        sleep(2)
-        self.users_choice
-      when 3 
-        puts "\n"
-        SuperHero.reset_all
-        self.first_step
-      when 4
-        sleep(1)
-        puts ' "Dreams save us.'
-        puts "  Dreams lift us up and transform us."
-        puts "  And on my soul I swear..."
-        puts "  Until my dream of a world where dignity, honor,"
-        puts "  and justice becomes the reality we all share..."
-        puts "  I'll never stop fighting. EVER." + '"'
-        puts "  SUPERMAN"
+      case index
 
-        sleep(1)
-        exit  
-    end
-
+        when 1
+          puts "\n"
+          self.display_categories
+          self.select_a_category
+          sleep(2)
+          self.users_choice
+        when 2
+          puts "\n"
+          self.display_search_name_result
+          self.select_a_superhero
+          self.display_categories
+          self.select_a_category
+          sleep(2)
+          self.users_choice
+        when 3 
+          puts "\n"
+          SuperHero.reset_all
+          self.first_step
+        when 4
+          self.exit_program
+      end
    end
 
 end  
