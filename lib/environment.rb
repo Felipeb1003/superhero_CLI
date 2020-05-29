@@ -2,7 +2,8 @@
 require 'pry'
 require 'net/http'
 require 'json'
-
+require 'dotenv/load'
+require 'rainbow'
 
 
 
