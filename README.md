@@ -2,7 +2,7 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/superhero_CLI`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+This gem creates an easy way for you to find everything you want to know about your favorite SuperHeroes! 
 
 ## Installation
 
@@ -22,7 +22,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First enter the name of your favorite Superhero.
+Then select the Superhero that you want to look up.
+After that select the category of information that you want to look up.
+You can select a different category, select another Superhero from your search or start all over again with a new search!
 
 ## Development
 
