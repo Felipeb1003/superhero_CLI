@@ -2,8 +2,8 @@ class CLI
 
     def start
       puts "\n"
-      puts Rainbow("\nWelcome to the Superhero Fact Checker!").red.underline
-      puts Rainbow("\nHere you can find everything you want to know about your favorite SuperHeroes!").darkgoldenrod
+      puts "\n " + Rainbow("Welcome to the Superhero Fact Checker!").red.underline
+      puts Rainbow("\n Here you can find everything you want to know about your favorite SuperHeroes!").darkgoldenrod
       self.first_step
     end
   
@@ -19,7 +19,7 @@ class CLI
     def display_search_name_result
         puts "\n"
         SuperHero.all.each.with_index(1) do |hero , index|
-        puts Rainbow("#{index}. ").darkgoldenrod + "#{hero.name}."
+        puts Rainbow(" #{index}. ").darkgoldenrod + "#{hero.name}."
         end
     end
 
@@ -28,7 +28,7 @@ class CLI
       puts Rainbow("Categories:").red
       @categories.each.with_index(1) do |category, index|
         
-        puts Rainbow("#{index}. ").darkgoldenrod + "#{category}." 
+        puts Rainbow(" #{index}. ").darkgoldenrod + "#{category}." 
       end
     end
 
