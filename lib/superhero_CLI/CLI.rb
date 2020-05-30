@@ -46,7 +46,7 @@ class CLI
     end
     
     def select_a_superhero
-      puts Rainbow("\nPlease Select the character you would like to look at:").cyan
+      puts Rainbow("\nPlease Select the number of the character you would like to look at:").cyan
        index = gets.strip.to_i - 1
        max_limit = SuperHero.all.length - 1
 
@@ -61,7 +61,7 @@ class CLI
     end
        
     def select_a_category
-      puts Rainbow("\nPlease select the category that you would like to see or type '").cyan + Rainbow("5").darkgoldenrod + Rainbow("' to exit:").cyan
+      puts Rainbow("\nPlease select the number of the category that you would like to see or type '").cyan + Rainbow("5").darkgoldenrod + Rainbow("' to exit:").cyan
       index = gets.strip.to_i - 1
       
 
